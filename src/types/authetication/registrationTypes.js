@@ -1,0 +1,5 @@
+export const registrationTypes = {
+    SIGNUP_REQUEST: 'USER_SIGNUP_REQUEST',
+    SIGNUP_SUCCESS: 'USER_SIGNUP_SUCCESS',
+    SIGNUP_FAIL: 'USER_SIGNUP_FAIL',
+}
