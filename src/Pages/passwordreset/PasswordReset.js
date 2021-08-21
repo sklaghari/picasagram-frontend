@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from 'yup'
 import lock from '../../../public/images/password.png'
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 const Wrapper = styled.div `
 display : grid;
 grid-column-gap : 0;
@@ -145,7 +145,7 @@ padding:10px;
 let PasswordResetSchema = yup.object().shape({
     email: yup.string().email().required('Please enter Email'),
 })
-const PasswordReset = ({passwordreset,isLoading, errMsg}) =>{
+const PasswordReset = ({passwordreset,isLoading,linkSent ,errMsg}) =>{
 const {register, handleSubmit, formState: { errors, isValid}} =useForm({
     resolver: yupResolver(PasswordResetSchema),
     mode: "onChange" ,
@@ -153,6 +153,9 @@ const {register, handleSubmit, formState: { errors, isValid}} =useForm({
 
 const onSubmit = (data) => {
 passwordreset(...Object.values(data))
+}
+if(linkSent){
+    return <Redirect to='/password-reset-link'/>
 }
 return (
 <Wrapper>
@@ -162,7 +165,7 @@ return (
     <Div>
         <Form onSubmit = {handleSubmit(onSubmit)}>
             <FormDiv>
-                <Img src={lock}/>
+                <Img src={lock} alt='password Reset'/>
                 <H4>Trouble Logging In?</H4>
                 <P>Enter your email and we'll send you a link to get back into your account.</P>
             </FormDiv>
@@ -193,6 +196,7 @@ return (
 const mapStateToProps = state => {
     return {
         isLoading: state.passwordresetReducer.isLoading,
+        linkSent: state.passwordresetReducer.linkSent,
         errMsg: state.errorReducer.msg,
         errStatus: state.errorReducer.status
     }

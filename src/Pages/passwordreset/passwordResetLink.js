@@ -45,19 +45,18 @@ padding:0;
 margin:5px;
 text-align:center;
 `
-const Activate = ()=>{
+const passwordResetLink = ()=>{
     return (
         <Wrapper>
             <Div>
                 <InnerDiv>
                     <Img src={logo} alt='password Reset'/>
                     <H2>Picsagram</H2>
-                    <H3>Please verify the account</H3>
-                    <H4>An activation link has been sent to your email</H4>
+                    <H3>An password reset link has been sent to your email</H3>
                 </InnerDiv>
             </Div>
         </Wrapper>
     )
 }
 
-export default Activate
+export default passwordResetLink

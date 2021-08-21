@@ -38,7 +38,6 @@ width:300px;
 height:130px;
 padding:30px;
 margin-top:5px;
-background-color:white;
 `
 const Form = styled.form`
 display:grid;
@@ -103,6 +102,7 @@ background-color:#FAFAFA;
 border 1px solid #EDEDED;
 border-radius:5px;
 width:92%;
+margin-bottom:5px;
 `
 const H4 = styled.h4`
 color:black;
@@ -215,8 +215,11 @@ const responseGoogle = response => {
 const onSubmit = (data) => {
 registration(...Object.values(data))
 }
-if(localStorage.getItem('access')|| isSignedup){
+if(localStorage.getItem('access')){
     return <Redirect to='/'/>
+}
+if(isSignedup){
+    return <Redirect to='/activate'/>
 }
 return (
 <Wrapper>
@@ -284,7 +287,7 @@ return (
                     {isValid ? <Button type='submit'>{registering?<Spinner/>:'Sign up'}</Button>:<DisabledButton>Sign up</DisabledButton>}
                 </FormDiv>  
             </Form>
-            <SecondDiv>Already have an account?<Link to='/login' style={{ textDecoration: 'none', color:'#0095F6' }}>Login</Link></SecondDiv>
+            <SecondDiv>Already have an account?<Link to='/login' style={{ textDecoration: 'none', color:'#0095F6' }}> Login</Link></SecondDiv>
             <ThirdDiv>
                 <p>Get the app.</p>
                 <img style={{ width:'300px', marginLeft:'30px'}} src={appStores} alt='Get the app'/>
